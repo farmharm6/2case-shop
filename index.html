@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CaseRoom | Чохли для iPhone</title>
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --card:#111521;
+      --muted:#9aa3b2;
+      --text:#e9eef8;
+      --line:rgba(255,255,255,.09);
+      --accent:#6ee7ff;
+      --accent2:#a78bfa;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(110,231,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(167,139,250,.18), transparent 60%),
+        radial-gradient(900px 700px at 50% 110%, rgba(52,211,153,.10), transparent 55%),
+        var(--bg);
+      line-height:1.4;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 80px}
+    header{
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,13,18,.85), rgba(11,13,18,.25));
+      border-bottom:1px solid var(--line);
+      z-index:10;
+    }
+    .topbar{
+      max-width:1120px; margin:0 auto;
+      padding:14px 18px;
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+        linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 14px 30px rgba(110,231,255,.15);
+    }
+    nav{display:flex; gap:14px; align-items:center; color:var(--muted); font-weight:600; font-size:14px}
+    nav a{padding:8px 10px; border-radius:12px}
+    nav a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      transition:.2s transform, .2s background, .2s border, .2s opacity;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.16)}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#071018;
+      box-shadow: 0 16px 40px rgba(110,231,255,.18);
+    }
+    .btn.primary:hover{filter:saturate(1.05); transform: translateY(-1px)}
+    .btn:disabled{opacity:.6; cursor:not-allowed; transform:none}
+
+    .hero{
+      padding:34px 0 22px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .heroCard{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:22px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 260px at 10% 0%, rgba(110,231,255,.18), transparent 70%),
+        radial-gradient(520px 260px at 80% 20%, rgba(167,139,250,.18), transparent 70%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .heroInner{position:relative}
+    .kicker{
+      display:inline-flex;
+      gap:10px; align-items:center;
+      font-weight:900; font-size:12px;
+      color:#06121a;
+      background: linear-gradient(135deg, rgba(110,231,255,.95), rgba(167,139,250,.95));
+      padding:8px 10px;
+      border-radius:999px;
+      width:fit-content;
+    }
+    h1{margin:14px 0 10px; font-size:40px; line-height:1.05}
+    .sub{color:var(--muted); font-size:16px; margin:0 0 14px; max-width:58ch}
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .mini{margin-top:10px; color:rgba(233,238,248,.75); font-size:12px}
+    .side{display:grid; gap:12px}
+    .chipRow{
+      display:grid; gap:12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .chip{
+      padding:14px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .chip .t{font-weight:900; letter-spacing:.2px}
+    .chip .d{color:var(--muted); font-size:13px; margin-top:6px}
+    .promo{
+      padding:16px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(52,211,153,.14), rgba(110,231,255,.10));
+      border:1px solid rgba(52,211,153,.22);
+    }
+    .promo .t{font-weight:900}
+    .promo .d{color:rgba(233,238,248,.8); font-size:13px; margin-top:6px}
+
+    .sectionTitle{
+      margin:22px 0 10px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+    }
+    .sectionTitle h2{margin:0; font-size:22px}
+    .tools{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .select, .search{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:800;
+      font-size:14px;
+      outline:none;
+    }
+    .search{min-width:220px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:12px;
+    }
+    .card{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      transition: .2s transform, .2s border, .2s background;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+    }
+    .img{
+      height:148px;
+      background:
+        radial-gradient(90px 50px at 20% 20%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, rgba(110,231,255,.65), rgba(167,139,250,.55));
+      position:relative;
+    }
+    .badge{
+      position:absolute; top:12px; left:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-weight:950;
+      font-size:12px;
+      background: rgba(11,13,18,.55);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(10px);
+    }
+    .content{padding:12px}
+    .name{font-weight:950; margin:2px 0 6px; letter-spacing:.1px}
+    .meta{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+    .price{font-weight:950; color: var(--text); font-size:15px}
+    .row{display:flex; gap:8px; margin-top:10px}
+    .row .btn{flex:1; padding:10px 10px}
+
+    .panel{
+      padding:16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.035);
+      border:1px solid var(--line);
+    }
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+    .panel h3{margin:0 0 10px; font-size:16px}
+    .steps{display:grid; gap:10px}
+    .step{display:flex; gap:10px}
+    .dot{
+      width:26px; height:26px; border-radius:10px;
+      display:grid; place-items:center;
+      font-weight:950;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      flex:0 0 auto;
+    }
+    .step .txt b{display:block}
+    .step .txt span{color:var(--muted); font-size:13px}
+    details{border-top:1px solid var(--line); padding:10px 0}
+    summary{cursor:pointer; font-weight:900}
+    details p{margin:8px 0 0; color:var(--muted); font-size:13px}
+
+    footer{
+      margin-top:18px;
+      padding:16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      color: rgba(233,238,248,.75);
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      font-size:13px;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color: rgba(233,238,248,.85);
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    /* Toast */
+    .toastWrap{
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      display: grid;
+      gap: 10px;
+      z-index: 99999;
+      width: min(360px, calc(100vw - 36px));
+    }
+    .toast{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(17,21,33,.92);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 12px 12px;
+      box-shadow: var(--shadow);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .tIcon{
+      width:28px;height:28px;border-radius:10px;
+      display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      flex:0 0 auto;
+      font-weight:950;
+    }
+    .tBody b{display:block; font-size:13px; margin-bottom:2px}
+    .tBody span{display:block; font-size:12px; color:rgba(233,238,248,.75)}
+    .tClose{
+      margin-left:auto;
+      border:none;
+      background: transparent;
+      color: rgba(233,238,248,.7);
+      cursor:pointer;
+      font-weight:950;
+      font-size:16px;
+      padding:0 6px;
+    }
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr}
+      .grid{grid-template-columns: repeat(2, minmax(0, 1fr))}
+      h1{font-size:34px}
+      .split{grid-template-columns: 1fr}
+    }
+    @media (max-width: 420px){
+      .grid{grid-template-columns: 1fr}
+      .search{min-width:0; width:100%}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <div style="font-size:15px; line-height:1; font-weight:950;">CaseRoom</div>
+        <div style="font-size:12px; color:var(--muted); font-weight:900; margin-top:2px;">Вітрина чохлів для iPhone</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#catalog">Каталог</a>
+      <a href="#how">Як оплатити</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+
+    <div class="cta">
+      <a class="pill" href="#catalog">Обрати</a>
+      <a class="btn primary" href="#catalog">Перейти до оплати</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="heroCard">
+      <div class="heroInner">
+        <div class="kicker">🔥 <b>10 хітів</b> для iPhone 11–15</div>
+        <h1>Чохли, які захищають<br/>і виглядають дорого.</h1>
+        <p class="sub">Натискай “Оплатити” під потрібним чохлом. Оплата йде через банківський шлюз. Мінімальна сума для оплати: 300 грн.</p>
+        <div class="heroActions">
+          <a class="btn primary" href="#catalog">Перейти в каталог</a>
+          <button class="btn" id="scrollFree">Оплатити свою суму</button>
+        </div>
+        <div class="mini">Порада: якщо потрібна інша сума, є окрема позиція “Вільна сума”.</div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="chipRow">
+        <div class="chip">
+          <div class="t">Захист камери</div>
+          <div class="d">Бортики, рамка, ударостійкість</div>
+        </div>
+        <div class="chip">
+          <div class="t">Приємний хват</div>
+          <div class="d">Soft-touch, антиковзання</div>
+        </div>
+        <div class="chip">
+          <div class="t">MagSafe Ready</div>
+          <div class="d">Є моделі під магніти</div>
+        </div>
+        <div class="chip">
+          <div class="t">Швидка відправка</div>
+          <div class="d">Підтвердження в месенджері</div>
+        </div>
+      </div>
+
+      <div class="promo">
+        <div class="t">🎁 Акція</div>
+        <div class="d">При замовленні 2-х чохлів знижка -10% (можеш змінити цей текст під себе).</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sectionTitle" id="catalog">
+    <h2>Каталог</h2>
+    <div class="tools">
+      <input class="search" id="search" placeholder="Пошук: прозорий, magSafe, armor..." />
+      <select class="select" id="modelFilter">
+        <option value="all">Усі моделі</option>
+        <option value="11">iPhone 11</option>
+        <option value="12">iPhone 12</option>
+        <option value="13">iPhone 13</option>
+        <option value="14">iPhone 14</option>
+        <option value="15">iPhone 15</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <section class="split" id="how">
+    <div class="panel">
+      <h3>Як оплатити</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="dot">1</div>
+          <div class="txt"><b>Обери чохол</b><span>Натисни “Оплатити” в картці.</span></div>
+        </div>
+        <div class="step">
+          <div class="dot">2</div>
+          <div class="txt"><b>Тебе перекине на оплату</b><span>Шлюз банку відкриється автоматично.</span></div>
+        </div>
+        <div class="step">
+          <div class="dot">3</div>
+          <div class="txt"><b>Після оплати повернешся назад</b><span>Можеш просто закрити сторінку або написати нам.</span></div>
+        </div>
+      </div>
+      <div class="mini" style="margin-top:12px;">
+        Якщо тобі потрібна інша сума, використай позицію <b>“Вільна сума”</b>. Мінімум 300 грн.
+      </div>
+    </div>
+
+    <div class="panel" id="faq">
+      <h3>FAQ</h3>
+      <details open>
+        <summary>Чому мінімум 300 грн?</summary>
+        <p>Так налаштовано для оплати на сайті. Якщо треба інше, можна змінити мінімум у коді.</p>
+      </details>
+      <details>
+        <summary>Оплата безпечна?</summary>
+        <p>Так, оплата йде через банківський платіжний шлюз (ви не вводите дані карти на цьому сайті).</p>
+      </details>
+      <details>
+        <summary>Як підтвердити замовлення?</summary>
+        <p>Після оплати напиши нам у месенджер (Instagram/Telegram) і скажи назву чохла та суму.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer id="contacts">
+    <div>
+      <b style="color:var(--text)">Контакти</b><br/>
+      <span>Instagram: @caseroom • Telegram: @caseroom</span><br/>
+      <span>Працюємо: 10:00–20:00</span>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+      <a class="btn" href="#catalog">Каталог</a>
+      <a class="btn primary" href="#catalog">Оплатити</a>
+    </div>
+  </footer>
+</div>
+
+<!-- Toast контейнер -->
+<div class="toastWrap" id="toastWrap"></div>
+
+<script>
+  // ====== Товари (10 + 1 "вільна сума") ======
+  const products = [
+    {id:1, name:"Clear Shield", price:5, tag:"прозорий", models:["11","12","13","14","15"], note:"тонкий, не жовтіє швидко", grad:["rgba(110,231,255,.75)","rgba(167,139,250,.60)"]},
+    {id:2, name:"Matte Soft Touch", price:349, tag:"матовий", models:["12","13","14","15"], note:"антиковзання, soft-touch", grad:["rgba(167,139,250,.75)","rgba(52,211,153,.45)"]},
+    {id:3, name:"Silicone Classic", price:329, tag:"силікон", models:["11","12","13","14"], note:"приємний хват, легкий", grad:["rgba(52,211,153,.65)","rgba(110,231,255,.55)"]},
+    {id:4, name:"Armor Pro", price:449, tag:"armor", models:["11","12","13","14","15"], note:"ударостійкий, посилені кути", grad:["rgba(251,191,36,.55)","rgba(110,231,255,.55)"]},
+    {id:5, name:"Camera Guard", price:399, tag:"камера", models:["12","13","14","15"], note:"рамка камери + бортики", grad:["rgba(110,231,255,.55)","rgba(233,238,248,.35)"]},
+    {id:6, name:"MagSafe Ready", price:499, tag:"magsafe", models:["13","14","15"], note:"під магніти, міцний хват", grad:["rgba(167,139,250,.70)","rgba(110,231,255,.55)"]},
+    {id:7, name:"Leather Look", price:459, tag:"lux", models:["12","13","14","15"], note:"ефект шкіри, виглядає дорого", grad:["rgba(233,238,248,.25)","rgba(167,139,250,.65)"]},
+    {id:8, name:"Glitter Glow", price:379, tag:"glitter", models:["11","12","13"], note:"блиск, ефектний вигляд", grad:["rgba(110,231,255,.55)","rgba(251,191,36,.45)"]},
+    {id:9, name:"Carbon Style", price:429, tag:"карбон", models:["12","13","14","15"], note:"текстура карбону, тонкий", grad:["rgba(52,211,153,.35)","rgba(167,139,250,.70)"]},
+    {id:10,name:"Shock Frame", price:469, tag:"shock", models:["11","12","13","14","15"], note:"посилена рамка, захист падінь", grad:["rgba(251,191,36,.45)","rgba(167,139,250,.55)"]},
+
+    // 11-та позиція: Вільна сума (мін 5)
+    {id:11, name:"Вільна сума", price:null, tag:"custom", models:["11","12","13","14","15"], note:"введи суму сам (мін 5 грн)", grad:["rgba(52,211,153,.45)","rgba(110,231,255,.35)"], isCustom:true},
+  ];
+
+  const MIN_AMOUNT = 5;
+
+  const grid = document.getElementById('grid');
+  const search = document.getElementById('search');
+  const modelFilter = document.getElementById('modelFilter');
+  const toastWrap = document.getElementById('toastWrap');
+
+  function money(uah){
+    return new Intl.NumberFormat('uk-UA').format(uah) + " грн";
+  }
+
+  function toast(type, title, msg){
+    const el = document.createElement('div');
+    el.className = 'toast';
+
+    const icon = document.createElement('div');
+    icon.className = 'tIcon';
+    icon.textContent = type === 'ok' ? '✓' : type === 'warn' ? '!' : '×';
+    if(type === 'ok') icon.style.borderColor = 'rgba(52,211,153,.35)';
+    if(type === 'warn') icon.style.borderColor = 'rgba(251,191,36,.35)';
+    if(type === 'bad') icon.style.borderColor = 'rgba(251,113,133,.35)';
+
+    const body = document.createElement('div');
+    body.className = 'tBody';
+    body.innerHTML = `<b>${title}</b><span>${msg}</span>`;
+
+    const close = document.createElement('button');
+    close.className = 'tClose';
+    close.textContent = '✕';
+    close.onclick = () => el.remove();
+
+    el.appendChild(icon);
+    el.appendChild(body);
+    el.appendChild(close);
+
+    toastWrap.appendChild(el);
+
+    setTimeout(() => {
+      if(el && el.parentNode) el.remove();
+    }, 5200);
+  }
+
+  // ====== ОПЛАТА: викликаємо Netlify function create-order ======
+  async function upcPay(amountUah, purchaseDesc, btn){
+    try{
+      if(!Number.isFinite(amountUah)) {
+        toast('bad', 'Помилка', 'Некоректна сума');
+        return;
+      }
+      if(amountUah < MIN_AMOUNT){
+        toast('warn', 'Мінімальна сума', `Мінімум для оплати: ${MIN_AMOUNT} грн`);
+        return;
+      }
+
+      if(btn){
+        btn.disabled = true;
+        btn.dataset.old = btn.textContent;
+        btn.textContent = 'Оплатити…';
+      }
+
+      const r = await fetch("/.netlify/functions/create-order", {
+        method: "POST",
+        headers: {"content-type":"application/json"},
+        body: JSON.stringify({ amountUah, purchaseDesc })
+      });
+
+      const text = await r.text();
+      let data = null;
+      try { data = JSON.parse(text); } catch(e){}
+
+      if (!r.ok) {
+        toast('bad', 'Помилка оплати', (data?.error || text || `HTTP ${r.status}`));
+        return;
+      }
+      if(!data || !data.actionUrl || !data.fields){
+        toast('bad', 'Помилка', 'Функція повернула неправильні дані');
+        return;
+      }
+
+      // Робимо POST form на UPC
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = data.actionUrl;
+
+      Object.entries(data.fields).forEach(([k, v]) => {
+        if (v === undefined || v === null) return;
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = k;
+        input.value = String(v);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+
+    } catch(e){
+      toast('bad', 'Критична помилка', e.message);
+    } finally {
+      if(btn){
+        btn.disabled = false;
+        btn.textContent = btn.dataset.old || 'Оплатити';
+        delete btn.dataset.old;
+      }
+    }
+  }
+
+  // ====== Рендер карток ======
+  function card(p){
+    const el = document.createElement('div');
+    el.className = 'card';
+
+    const img = document.createElement('div');
+    img.className = 'img';
+    img.style.background =
+      `radial-gradient(90px 50px at 20% 20%, rgba(255,255,255,.25), transparent 60%),
+       linear-gradient(135deg, ${p.grad[0]}, ${p.grad[1]})`;
+
+    const badge = document.createElement('div');
+    badge.className = 'badge';
+    badge.textContent = p.isCustom ? 'ВІЛЬНА СУМА' : p.tag.toUpperCase();
+    img.appendChild(badge);
+
+    const content = document.createElement('div');
+    content.className = 'content';
+
+    const name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = p.name;
+
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+
+    if(p.isCustom){
+      meta.innerHTML = `<span>${p.note}</span><span class="price">від ${money(MIN_AMOUNT)}</span>`;
+    } else {
+      meta.innerHTML = `<span>${p.note}</span><span class="price">${money(p.price)}</span>`;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'row';
+
+    // Кнопка оплатити
+    const btnPay = document.createElement('button');
+    btnPay.className = 'btn primary';
+
+    if(p.isCustom){
+      btnPay.textContent = 'Оплатити свою суму';
+    } else {
+      btnPay.textContent = 'Оплатити';
+    }
+
+    // Друга кнопка / поле
+    const right = document.createElement('div');
+    right.style.flex = '1';
+
+    if(p.isCustom){
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.min = String(MIN_AMOUNT);
+      input.step = '1';
+      input.placeholder = `Сума (мін ${MIN_AMOUNT})`;
+      input.style.width = '100%';
+      input.style.padding = '10px 10px';
+      input.style.borderRadius = '14px';
+      input.style.border = '1px solid rgba(255,255,255,.14)';
+      input.style.background = 'rgba(255,255,255,.04)';
+      input.style.color = 'var(--text)';
+      input.style.fontWeight = '900';
+      input.style.outline = 'none';
+
+      btnPay.onclick = () => {
+        const val = Number(input.value);
+        upcPay(val, `Оплата: Вільна сума`, btnPay);
+      };
+
+      right.appendChild(input);
+
+    } else {
+      const btnInfo = document.createElement('button');
+      btnInfo.className = 'btn';
+      btnInfo.textContent = 'Моделі';
+      btnInfo.onclick = () => toast('ok', 'Підійде для', `iPhone: ${p.models.join(', ')}`);
+      right.appendChild(btnInfo);
+
+      btnPay.onclick = () => upcPay(p.price, `Оплата: ${p.name}`, btnPay);
+    }
+
+    row.appendChild(btnPay);
+    row.appendChild(right);
+
+    content.appendChild(name);
+    content.appendChild(meta);
+    content.appendChild(row);
+
+    el.appendChild(img);
+    el.appendChild(content);
+    return el;
+  }
+
+  function render(){
+    grid.innerHTML = '';
+    const q = (search.value || '').trim().toLowerCase();
+    const mf = modelFilter.value;
+
+    // Custom item завжди показуємо першим у каталозі
+    const sorted = [...products].sort((a,b) => (b.isCustom?1:0) - (a.isCustom?1:0));
+
+    const filtered = sorted.filter(p => {
+      const text = (p.name + " " + p.tag + " " + p.note).toLowerCase();
+      const okText = !q || text.includes(q);
+      const okModel = mf === 'all' ? true : p.models.includes(mf);
+      return okText && okModel;
+    });
+
+    filtered.forEach(p => grid.appendChild(card(p)));
+
+    if(filtered.length === 0){
+      const empty = document.createElement('div');
+      empty.style.gridColumn = '1 / -1';
+      empty.className = 'panel';
+      empty.innerHTML = `<b>Нічого не знайдено</b><div class="mini">Спробуй інший запит або обери “Усі моделі”.</div>`;
+      grid.appendChild(empty);
+    }
+  }
+
+  search.addEventListener('input', render);
+  modelFilter.addEventListener('change', render);
+
+  document.getElementById('scrollFree').onclick = () => {
+    // прокрутка до каталогу й підказка
+    document.getElementById('catalog').scrollIntoView({behavior:'smooth'});
+    toast('ok', 'Підказка', 'Позиція “Вільна сума” є в каталозі. Введи суму і натисни оплатити.');
+  };
+
+  render();
+</script>
+
+</body>
+</html>
+
+
